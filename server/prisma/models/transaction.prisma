@@ -1,0 +1,157 @@
+model Transaction {
+  id                String          @id @default(cuid())
+  userId            String
+  categoryId        String
+  paymentMethodId   String?
+  
+  type              TransactionType
+  amount            Decimal         @db.Decimal(15, 2)
+  currency          Currency        @default(IDR)
+  
+  title             String?         // Optional title
+  description       String?         @db.Text
+  notes             String?         @db.Text
+  
+  // Date & Time
+  transactionDate   DateTime        @default(now())
+  
+  // Location (optional)
+  location          String?
+  latitude          Float?
+  longitude         Float?
+  
+  // Attachments
+  attachments       Json?           // Array of attachment URLs
+  
+  // For transfers
+  toUserId          String?         // If transfer to another user
+  linkedTransactionId String?       @unique // Link expense to income for transfers
+  
+  // Metadata
+  isRecurring       Boolean         @default(false)
+  recurringId       String?
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  deletedAt         DateTime?
+
+  // Relations
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category          Category        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  paymentMethod     PaymentMethod?  @relation(fields: [paymentMethodId], references: [id], onDelete: SetNull)
+  recurring         RecurringTransaction? @relation(fields: [recurringId], references: [id])
+  tags              TransactionTag[]
+  linkedTransaction Transaction?    @relation("TransferLink", fields: [linkedTransactionId], references: [id])
+  transferLink      Transaction?    @relation("TransferLink")
+
+  @@index([userId])
+  @@index([categoryId])
+  @@index([type])
+  @@index([transactionDate])
+  @@index([deletedAt])
+  @@index([recurringId])
+  @@fulltext([title, description])
+  @@map("transactions")
+}
+
+model RecurringTransaction {
+  id                String              @id @default(cuid())
+  userId            String
+  categoryId        String
+  paymentMethodId   String?
+  
+  type              TransactionType
+  amount            Decimal             @db.Decimal(15, 2)
+  currency          Currency            @default(IDR)
+  
+  title             String
+  description       String?             @db.Text
+  
+  frequency         RecurrenceFrequency
+  startDate         DateTime
+  endDate           DateTime?
+  nextDate          DateTime
+  
+  isActive          Boolean             @default(true)
+  
+  // Day of month for MONTHLY (1-31)
+  dayOfMonth        Int?
+  // Day of week for WEEKLY (0-6, Sunday = 0)
+  dayOfWeek         Int?
+  
+  lastGeneratedAt   DateTime?
+  
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  deletedAt         DateTime?
+
+  // Relations
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category          Category            @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  paymentMethod     PaymentMethod?      @relation(fields: [paymentMethodId], references: [id], onDelete: SetNull)
+  transactions      Transaction[]
+
+  @@index([userId])
+  @@index([isActive])
+  @@index([nextDate])
+  @@map("recurring_transactions")
+}
+
+model Tag {
+  id                String            @id @default(cuid())
+  name              String            @unique
+  color             String?
+  
+  createdAt         DateTime          @default(now())
+
+  // Relations
+  transactions      TransactionTag[]
+
+  @@map("tags")
+}
+
+model TransactionTag {
+  transactionId     String
+  tagId             String
+
+  // Relations
+  transaction       Transaction       @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  tag               Tag               @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([transactionId, tagId])
+  @@index([transactionId])
+  @@index([tagId])
+  @@map("transaction_tags")
+}
+
+model PaymentMethod {
+  id                String          @id @default(cuid())
+  userId            String
+  
+  name              String          // Cash, Bank BCA, GoPay, etc
+  type              String          // cash, bank, ewallet, credit_card
+  icon              String?
+  color             String?
+  
+  // Bank/Card details
+  accountNumber     String?
+  accountName       String?
+  
+  isDefault         Boolean         @default(false)
+  isActive          Boolean         @default(true)
+  
+  balance           Decimal?        @db.Decimal(15, 2) // Optional: track balance
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  deletedAt         DateTime?
+
+  // Relations
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions      Transaction[]
+  recurringTransactions RecurringTransaction[]
+
+  @@index([userId])
+  @@index([isDefault])
+  @@map("payment_methods")
+}

@@ -3,3 +3,5 @@
 .env.development
 .env.example
 /dist
+
+/generated/prisma

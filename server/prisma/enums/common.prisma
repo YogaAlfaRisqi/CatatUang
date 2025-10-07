@@ -1,0 +1,55 @@
+enum UserRole {
+    USER
+    ADMIN
+    SUPER ADMIN
+}
+
+enum UserStatus{
+    ACTIVE 
+    INACTIVE
+    SUSPENED
+    DELETED
+}
+
+enum TransactionType{
+    INCOME
+    EXPENSE
+    TRANSFER
+}
+
+enum CategoryType{
+    INCOME
+    EXPENSE
+    BOTH
+}
+
+enum RecurrenceFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  PAUSED
+}
+
+enum NotificationType {
+  BUDGET_WARNING
+  BUDGET_EXCEEDED
+  GOAL_MILESTONE
+  RECURRING_REMINDER
+  REPORT_READY
+}
+
+enum Currency {
+  IDR
+  USD
+  EUR
+  SGD
+  MYR
+}
+
