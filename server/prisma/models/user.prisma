@@ -1,0 +1,107 @@
+model User {
+  id                String        @id @default(cuid())
+  email             String        @unique
+  password          String?       // Null for social login
+  provider          AuthProvider  @default(EMAIL)
+  providerId        String?       // ID from social provider
+  
+  emailVerified     Boolean       @default(false)
+  status            UserStatus    @default(ACTIVE)
+  
+  lastLoginAt       DateTime?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?     // Soft delete
+
+  // Relations
+  profile           UserProfile?
+  transactions      Transaction[]
+  budgets           Budget[]
+  goals             Goal[]
+  categories        Category[]    // Custom categories only
+  paymentMethods    PaymentMethod[]
+  recurringTransactions RecurringTransaction[]
+  notifications     Notification[]
+  sessions          Session[]
+  settings          UserSettings?
+
+  @@index([email])
+  @@index([provider])
+  @@index([deletedAt])
+  @@map("users")
+}
+
+
+model UserProfile {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  
+  firstName         String?
+  lastName          String?
+  fullName          String?
+  avatar            String?
+  phone             String?   @unique
+  
+  dateOfBirth       DateTime?
+  gender            String?
+  
+  // Preferences
+  defaultCurrency   Currency  @default(IDR)
+  language          String    @default("id")
+  timezone          String    @default("Asia/Jakarta")
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Relations
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_profiles")
+}
+
+model UserSettings {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  
+  // Notification Settings
+  emailNotifications    Boolean @default(true)
+  pushNotifications     Boolean @default(true)
+  budgetAlerts          Boolean @default(true)
+  goalReminders         Boolean @default(true)
+  
+  // Budget Alert Threshold (percentage)
+  budgetAlertThreshold  Int     @default(80) // Alert at 80% of budget
+  
+  // Display Settings
+  showDecimal           Boolean @default(true)
+  darkMode              Boolean @default(false)
+  
+  // Privacy
+  shareStatistics       Boolean @default(false)
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Relations
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}
+
+model Session {
+  id            String    @id @default(cuid())
+  userId        String
+  token         String    @unique
+  refreshToken  String?   @unique
+  deviceInfo    Json?     // Device type, OS, Browser
+  ipAddress     String?
+  expiresAt     DateTime
+  createdAt     DateTime  @default(now())
+
+  // Relations
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@map("sessions")
+}

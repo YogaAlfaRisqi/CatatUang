@@ -17,7 +17,15 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/api/v1", api);
-
+// Health check at root
+app.get('/', (req, res) => {
+  res.json({
+    name: "Catat Uang API",
+    version: "1.0.0",
+    status: "running",
+    docs: "/api/v1/"
+  });
+});
 
 // Error handling
 // app.use(errorHandler)

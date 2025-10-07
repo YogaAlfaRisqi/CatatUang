@@ -1,0 +1,36 @@
+model Category {
+  id                String        @id @default(cuid())
+  userId            String?       // NULL = predefined, NOT NULL = custom
+  
+  name              String
+  slug              String
+  icon              String?       // Icon name or emoji
+  color             String?       // Hex color for UI
+  type              CategoryType
+  
+  isSystem          Boolean       @default(false) // System categories can't be deleted
+  isActive          Boolean       @default(true)
+  
+  parentId          String?       // For subcategories
+  position          Int           @default(0)
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+
+  // Relations
+  user              User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent            Category?     @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children          Category[]    @relation("CategoryHierarchy")
+  
+  transactions      Transaction[]
+  budgets           Budget[]
+  recurringTransactions RecurringTransaction[]
+
+  @@unique([userId, slug])
+  @@index([userId])
+  @@index([type])
+  @@index([isSystem])
+  @@index([parentId])
+  @@map("categories")
+}
