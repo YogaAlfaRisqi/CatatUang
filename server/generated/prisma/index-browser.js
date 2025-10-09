@@ -120,9 +120,329 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  action: 'action',
+  entity: 'entity',
+  entityId: 'entityId',
+  oldValues: 'oldValues',
+  newValues: 'newValues',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BudgetScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  categoryId: 'categoryId',
+  name: 'name',
+  amountLimit: 'amountLimit',
+  currency: 'currency',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  alertThreshold: 'alertThreshold',
+  hasAlerted: 'hasAlerted',
+  isRolling: 'isRolling',
+  rollingFrequency: 'rollingFrequency',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  slug: 'slug',
+  icon: 'icon',
+  color: 'color',
+  type: 'type',
+  isSystem: 'isSystem',
+  isActive: 'isActive',
+  parentId: 'parentId',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.GoalScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  icon: 'icon',
+  color: 'color',
+  targetAmount: 'targetAmount',
+  currentAmount: 'currentAmount',
+  currency: 'currency',
+  startDate: 'startDate',
+  deadline: 'deadline',
+  status: 'status',
+  milestones: 'milestones',
+  autoSaveEnabled: 'autoSaveEnabled',
+  autoSaveAmount: 'autoSaveAmount',
+  autoSaveFrequency: 'autoSaveFrequency',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.GoalContributionScalarFieldEnum = {
+  id: 'id',
+  goalId: 'goalId',
+  amount: 'amount',
+  notes: 'notes',
+  contributedAt: 'contributedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  data: 'data',
+  isRead: 'isRead',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  categoryId: 'categoryId',
+  paymentMethodId: 'paymentMethodId',
+  type: 'type',
+  amount: 'amount',
+  currency: 'currency',
+  title: 'title',
+  description: 'description',
+  notes: 'notes',
+  transactionDate: 'transactionDate',
+  location: 'location',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  attachments: 'attachments',
+  toUserId: 'toUserId',
+  linkedTransactionId: 'linkedTransactionId',
+  isRecurring: 'isRecurring',
+  recurringId: 'recurringId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.RecurringTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  categoryId: 'categoryId',
+  paymentMethodId: 'paymentMethodId',
+  type: 'type',
+  amount: 'amount',
+  currency: 'currency',
+  title: 'title',
+  description: 'description',
+  frequency: 'frequency',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  nextDate: 'nextDate',
+  isActive: 'isActive',
+  dayOfMonth: 'dayOfMonth',
+  dayOfWeek: 'dayOfWeek',
+  lastGeneratedAt: 'lastGeneratedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TransactionTagScalarFieldEnum = {
+  transactionId: 'transactionId',
+  tagId: 'tagId'
+};
+
+exports.Prisma.PaymentMethodScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  type: 'type',
+  icon: 'icon',
+  color: 'color',
+  accountNumber: 'accountNumber',
+  accountName: 'accountName',
+  isDefault: 'isDefault',
+  isActive: 'isActive',
+  balance: 'balance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  provider: 'provider',
+  providerId: 'providerId',
+  emailVerified: 'emailVerified',
+  status: 'status',
+  lastLoginAt: 'lastLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.UserProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  fullName: 'fullName',
+  avatar: 'avatar',
+  phone: 'phone',
+  dateOfBirth: 'dateOfBirth',
+  gender: 'gender',
+  defaultCurrency: 'defaultCurrency',
+  language: 'language',
+  timezone: 'timezone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSettingsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  emailNotifications: 'emailNotifications',
+  pushNotifications: 'pushNotifications',
+  budgetAlerts: 'budgetAlerts',
+  goalReminders: 'goalReminders',
+  budgetAlertThreshold: 'budgetAlertThreshold',
+  showDecimal: 'showDecimal',
+  darkMode: 'darkMode',
+  shareStatistics: 'shareStatistics',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  refreshToken: 'refreshToken',
+  deviceInfo: 'deviceInfo',
+  ipAddress: 'ipAddress',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.Currency = exports.$Enums.Currency = {
+  IDR: 'IDR',
+  USD: 'USD',
+  EUR: 'EUR',
+  SGD: 'SGD',
+  MYR: 'MYR'
+};
+
+exports.RecurrenceFrequency = exports.$Enums.RecurrenceFrequency = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
+};
+
+exports.CategoryType = exports.$Enums.CategoryType = {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE',
+  BOTH: 'BOTH'
+};
+
+exports.GoalStatus = exports.$Enums.GoalStatus = {
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  PAUSED: 'PAUSED'
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  BUDGET_WARNING: 'BUDGET_WARNING',
+  BUDGET_EXCEEDED: 'BUDGET_EXCEEDED',
+  GOAL_MILESTONE: 'GOAL_MILESTONE',
+  RECURRING_REMINDER: 'RECURRING_REMINDER',
+  REPORT_READY: 'REPORT_READY'
+};
+
+exports.TransactionType = exports.$Enums.TransactionType = {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE',
+  TRANSFER: 'TRANSFER'
+};
+
+exports.AuthProvider = exports.$Enums.AuthProvider = {
+  EMAIL: 'EMAIL',
+  GOOGLE: 'GOOGLE',
+  FACEBOOK: 'FACEBOOK',
+  APPLE: 'APPLE'
+};
+
+exports.UserStatus = exports.$Enums.UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  SUSPENED: 'SUSPENED',
+  DELETED: 'DELETED'
+};
 
 exports.Prisma.ModelName = {
-
+  AuditLog: 'AuditLog',
+  Budget: 'Budget',
+  Category: 'Category',
+  Goal: 'Goal',
+  GoalContribution: 'GoalContribution',
+  Notification: 'Notification',
+  Transaction: 'Transaction',
+  RecurringTransaction: 'RecurringTransaction',
+  Tag: 'Tag',
+  TransactionTag: 'TransactionTag',
+  PaymentMethod: 'PaymentMethod',
+  User: 'User',
+  UserProfile: 'UserProfile',
+  UserSettings: 'UserSettings',
+  Session: 'Session'
 };
 
 /**

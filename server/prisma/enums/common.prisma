@@ -1,9 +1,9 @@
 enum UserRole {
-    USER
-    ADMIN
-    SUPER_ADMIN
+  USER
+  ADMIN
+  SUPER_ADMIN
 
-    @@schema("user")
+  @@schema("user")
 }
 
 enum AuthProvider {
@@ -11,35 +11,33 @@ enum AuthProvider {
   GOOGLE
   FACEBOOK
   APPLE
-  
-  @@schema("user")
-}
-
-enum UserStatus{
-    ACTIVE 
-    INACTIVE
-    SUSPENED
-    DELETED
-
 
   @@schema("user")
 }
 
-enum TransactionType{
-    INCOME
-    EXPENSE
-    TRANSFER
-          @@schema("transaction")
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENED
+  DELETED
 
+  @@schema("user")
 }
 
-enum CategoryType{
-    INCOME
-    EXPENSE
-    BOTH
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
 
-          @@schema("category")
+  @@schema("transaction")
+}
 
+enum CategoryType {
+  INCOME
+  EXPENSE
+  BOTH
+
+  @@schema("category")
 }
 
 enum RecurrenceFrequency {
@@ -47,6 +45,7 @@ enum RecurrenceFrequency {
   WEEKLY
   MONTHLY
   YEARLY
+
   @@schema("transaction")
 }
 
@@ -55,8 +54,8 @@ enum GoalStatus {
   COMPLETED
   CANCELLED
   PAUSED
-        @@schema("goal")
 
+  @@schema("goal")
 }
 
 enum NotificationType {
@@ -65,8 +64,8 @@ enum NotificationType {
   GOAL_MILESTONE
   RECURRING_REMINDER
   REPORT_READY
-        @@schema("notification")
 
+  @@schema("notification")
 }
 
 enum Currency {
@@ -75,6 +74,6 @@ enum Currency {
   EUR
   SGD
   MYR
+
   @@schema("user")
 }
-
