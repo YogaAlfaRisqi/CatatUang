@@ -92,9 +92,335 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  action: 'action',
+  entity: 'entity',
+  entityId: 'entityId',
+  oldValues: 'oldValues',
+  newValues: 'newValues',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BudgetScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  categoryId: 'categoryId',
+  name: 'name',
+  amountLimit: 'amountLimit',
+  currency: 'currency',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  alertThreshold: 'alertThreshold',
+  hasAlerted: 'hasAlerted',
+  isRolling: 'isRolling',
+  rollingFrequency: 'rollingFrequency',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  slug: 'slug',
+  icon: 'icon',
+  color: 'color',
+  type: 'type',
+  isSystem: 'isSystem',
+  isActive: 'isActive',
+  parentId: 'parentId',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.GoalScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  icon: 'icon',
+  color: 'color',
+  targetAmount: 'targetAmount',
+  currentAmount: 'currentAmount',
+  currency: 'currency',
+  startDate: 'startDate',
+  deadline: 'deadline',
+  status: 'status',
+  milestones: 'milestones',
+  autoSaveEnabled: 'autoSaveEnabled',
+  autoSaveAmount: 'autoSaveAmount',
+  autoSaveFrequency: 'autoSaveFrequency',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.GoalContributionScalarFieldEnum = {
+  id: 'id',
+  goalId: 'goalId',
+  amount: 'amount',
+  notes: 'notes',
+  contributedAt: 'contributedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  data: 'data',
+  isRead: 'isRead',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  categoryId: 'categoryId',
+  paymentMethodId: 'paymentMethodId',
+  type: 'type',
+  amount: 'amount',
+  currency: 'currency',
+  title: 'title',
+  description: 'description',
+  notes: 'notes',
+  transactionDate: 'transactionDate',
+  location: 'location',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  attachments: 'attachments',
+  toUserId: 'toUserId',
+  linkedTransactionId: 'linkedTransactionId',
+  isRecurring: 'isRecurring',
+  recurringId: 'recurringId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.RecurringTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  categoryId: 'categoryId',
+  paymentMethodId: 'paymentMethodId',
+  type: 'type',
+  amount: 'amount',
+  currency: 'currency',
+  title: 'title',
+  description: 'description',
+  frequency: 'frequency',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  nextDate: 'nextDate',
+  isActive: 'isActive',
+  dayOfMonth: 'dayOfMonth',
+  dayOfWeek: 'dayOfWeek',
+  lastGeneratedAt: 'lastGeneratedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TransactionTagScalarFieldEnum = {
+  transactionId: 'transactionId',
+  tagId: 'tagId'
+};
+
+exports.Prisma.PaymentMethodScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  type: 'type',
+  icon: 'icon',
+  color: 'color',
+  accountNumber: 'accountNumber',
+  accountName: 'accountName',
+  isDefault: 'isDefault',
+  isActive: 'isActive',
+  balance: 'balance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  provider: 'provider',
+  providerId: 'providerId',
+  emailVerified: 'emailVerified',
+  status: 'status',
+  lastLoginAt: 'lastLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.UserProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  fullName: 'fullName',
+  avatar: 'avatar',
+  phone: 'phone',
+  dateOfBirth: 'dateOfBirth',
+  gender: 'gender',
+  defaultCurrency: 'defaultCurrency',
+  language: 'language',
+  timezone: 'timezone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSettingsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  emailNotifications: 'emailNotifications',
+  pushNotifications: 'pushNotifications',
+  budgetAlerts: 'budgetAlerts',
+  goalReminders: 'goalReminders',
+  budgetAlertThreshold: 'budgetAlertThreshold',
+  showDecimal: 'showDecimal',
+  darkMode: 'darkMode',
+  shareStatistics: 'shareStatistics',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  refreshToken: 'refreshToken',
+  deviceInfo: 'deviceInfo',
+  ipAddress: 'ipAddress',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.UserRole = exports.$Enums.UserRole = {
+  USER: 'USER',
+  ADMIN: 'ADMIN',
+  SUPER_ADMIN: 'SUPER_ADMIN'
+};
+
+exports.AuthProvider = exports.$Enums.AuthProvider = {
+  EMAIL: 'EMAIL',
+  GOOGLE: 'GOOGLE',
+  FACEBOOK: 'FACEBOOK',
+  APPLE: 'APPLE'
+};
+
+exports.UserStatus = exports.$Enums.UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  SUSPENED: 'SUSPENED',
+  DELETED: 'DELETED'
+};
+
+exports.TransactionType = exports.$Enums.TransactionType = {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE',
+  TRANSFER: 'TRANSFER'
+};
+
+exports.CategoryType = exports.$Enums.CategoryType = {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE',
+  BOTH: 'BOTH'
+};
+
+exports.RecurrenceFrequency = exports.$Enums.RecurrenceFrequency = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
+};
+
+exports.GoalStatus = exports.$Enums.GoalStatus = {
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  PAUSED: 'PAUSED'
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  BUDGET_WARNING: 'BUDGET_WARNING',
+  BUDGET_EXCEEDED: 'BUDGET_EXCEEDED',
+  GOAL_MILESTONE: 'GOAL_MILESTONE',
+  RECURRING_REMINDER: 'RECURRING_REMINDER',
+  REPORT_READY: 'REPORT_READY'
+};
+
+exports.Currency = exports.$Enums.Currency = {
+  IDR: 'IDR',
+  USD: 'USD',
+  EUR: 'EUR',
+  SGD: 'SGD',
+  MYR: 'MYR'
+};
 
 exports.Prisma.ModelName = {
-
+  AuditLog: 'AuditLog',
+  Budget: 'Budget',
+  Category: 'Category',
+  Goal: 'Goal',
+  GoalContribution: 'GoalContribution',
+  Notification: 'Notification',
+  Transaction: 'Transaction',
+  RecurringTransaction: 'RecurringTransaction',
+  Tag: 'Tag',
+  TransactionTag: 'TransactionTag',
+  PaymentMethod: 'PaymentMethod',
+  User: 'User',
+  UserProfile: 'UserProfile',
+  UserSettings: 'UserSettings',
+  Session: 'Session'
 };
 /**
  * Create the Client
@@ -120,7 +446,9 @@ const config = {
         "native": true
       }
     ],
-    "previewFeatures": [],
+    "previewFeatures": [
+      "prismaSchemaFolder"
+    ],
     "sourceFilePath": "E:\\Programming\\cross\\catatuang\\server\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
@@ -144,13 +472,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n",
-  "inlineSchemaHash": "6b7d614a3038e0f41e8dfeb2e366d3173e8c3eea58bb78c1877e8511f6fcb207",
+  "inlineSchema": "enum UserRole {\n  USER\n  ADMIN\n  SUPER_ADMIN\n\n  @@schema(\"user\")\n}\n\nenum AuthProvider {\n  EMAIL\n  GOOGLE\n  FACEBOOK\n  APPLE\n\n  @@schema(\"user\")\n}\n\nenum UserStatus {\n  ACTIVE\n  INACTIVE\n  SUSPENED\n  DELETED\n\n  @@schema(\"user\")\n}\n\nenum TransactionType {\n  INCOME\n  EXPENSE\n  TRANSFER\n\n  @@schema(\"transaction\")\n}\n\nenum CategoryType {\n  INCOME\n  EXPENSE\n  BOTH\n\n  @@schema(\"category\")\n}\n\nenum RecurrenceFrequency {\n  DAILY\n  WEEKLY\n  MONTHLY\n  YEARLY\n\n  @@schema(\"transaction\")\n}\n\nenum GoalStatus {\n  ACTIVE\n  COMPLETED\n  CANCELLED\n  PAUSED\n\n  @@schema(\"goal\")\n}\n\nenum NotificationType {\n  BUDGET_WARNING\n  BUDGET_EXCEEDED\n  GOAL_MILESTONE\n  RECURRING_REMINDER\n  REPORT_READY\n\n  @@schema(\"notification\")\n}\n\nenum Currency {\n  IDR\n  USD\n  EUR\n  SGD\n  MYR\n\n  @@schema(\"user\")\n}\n\nmodel AuditLog {\n  id        String   @id @default(cuid())\n  userId    String?\n  action    String\n  entity    String\n  entityId  String\n  oldValues Json?\n  newValues Json?\n  ipAddress String?\n  userAgent String?\n  createdAt DateTime @default(now())\n\n  @@index([userId])\n  @@index([entity, entityId])\n  @@index([createdAt])\n  @@map(\"audit_logs\")\n  @@schema(\"audit\")\n}\n\nmodel Budget {\n  id               String               @id @default(cuid())\n  userId           String\n  categoryId       String?\n  name             String?\n  amountLimit      Decimal              @db.Decimal(15, 2)\n  currency         Currency             @default(IDR)\n  startDate        DateTime\n  endDate          DateTime\n  alertThreshold   Int                  @default(80)\n  hasAlerted       Boolean              @default(false)\n  isRolling        Boolean              @default(false)\n  rollingFrequency RecurrenceFrequency?\n  isActive         Boolean              @default(true)\n  createdAt        DateTime             @default(now())\n  updatedAt        DateTime             @updatedAt\n  deletedAt        DateTime?\n  category         Category?            @relation(fields: [categoryId], references: [id], onDelete: Cascade)\n  user             User                 @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([userId])\n  @@index([categoryId])\n  @@index([startDate, endDate])\n  @@index([isActive])\n  @@map(\"budgets\")\n  @@schema(\"budget\")\n}\n\nmodel Category {\n  id                    String                 @id @default(cuid())\n  userId                String?\n  name                  String\n  slug                  String\n  icon                  String?\n  color                 String?\n  type                  CategoryType\n  isSystem              Boolean                @default(false)\n  isActive              Boolean                @default(true)\n  parentId              String?\n  position              Int                    @default(0)\n  createdAt             DateTime               @default(now())\n  updatedAt             DateTime               @updatedAt\n  deletedAt             DateTime?\n  budgets               Budget[]\n  parent                Category?              @relation(\"CategoryHierarchy\", fields: [parentId], references: [id])\n  children              Category[]             @relation(\"CategoryHierarchy\")\n  user                  User?                  @relation(fields: [userId], references: [id], onDelete: Cascade)\n  recurringTransactions RecurringTransaction[]\n  transactions          Transaction[]\n\n  @@unique([userId, slug])\n  @@index([userId])\n  @@index([type])\n  @@index([isSystem])\n  @@index([parentId])\n  @@map(\"categories\")\n  @@schema(\"category\")\n}\n\nmodel Goal {\n  id                String               @id @default(cuid())\n  userId            String\n  title             String\n  description       String?\n  icon              String?\n  color             String?\n  targetAmount      Decimal              @db.Decimal(15, 2)\n  currentAmount     Decimal              @default(0) @db.Decimal(15, 2)\n  currency          Currency             @default(IDR)\n  startDate         DateTime             @default(now())\n  deadline          DateTime?\n  status            GoalStatus           @default(ACTIVE)\n  milestones        Json?\n  autoSaveEnabled   Boolean              @default(false)\n  autoSaveAmount    Decimal?             @db.Decimal(15, 2)\n  autoSaveFrequency RecurrenceFrequency?\n  completedAt       DateTime?\n  createdAt         DateTime             @default(now())\n  updatedAt         DateTime             @updatedAt\n  deletedAt         DateTime?\n  contributions     GoalContribution[]\n  user              User                 @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([userId])\n  @@index([status])\n  @@index([deadline])\n  @@map(\"goals\")\n  @@schema(\"goal\")\n}\n\nmodel GoalContribution {\n  id            String   @id @default(cuid())\n  goalId        String\n  amount        Decimal  @db.Decimal(15, 2)\n  notes         String?\n  contributedAt DateTime @default(now())\n  goal          Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)\n\n  @@index([goalId])\n  @@index([contributedAt])\n  @@map(\"goal_contributions\")\n  @@schema(\"goal\")\n}\n\nmodel Notification {\n  id        String           @id @default(cuid())\n  userId    String\n  type      NotificationType\n  title     String\n  message   String\n  data      Json?\n  isRead    Boolean          @default(false)\n  readAt    DateTime?\n  createdAt DateTime         @default(now())\n  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([userId])\n  @@index([isRead])\n  @@index([createdAt])\n  @@map(\"notifications\")\n  @@schema(\"notification\")\n}\n\nmodel Transaction {\n  id                  String                @id @default(cuid())\n  userId              String\n  categoryId          String\n  paymentMethodId     String?\n  type                TransactionType\n  amount              Decimal               @db.Decimal(15, 2)\n  currency            Currency              @default(IDR)\n  title               String?\n  description         String?\n  notes               String?\n  transactionDate     DateTime              @default(now())\n  location            String?\n  latitude            Float?\n  longitude           Float?\n  attachments         Json?\n  toUserId            String?\n  linkedTransactionId String?               @unique\n  isRecurring         Boolean               @default(false)\n  recurringId         String?\n  createdAt           DateTime              @default(now())\n  updatedAt           DateTime              @updatedAt\n  deletedAt           DateTime?\n  tags                TransactionTag[]\n  category            Category              @relation(fields: [categoryId], references: [id])\n  linkedTransaction   Transaction?          @relation(\"TransferLink\", fields: [linkedTransactionId], references: [id])\n  transferLink        Transaction?          @relation(\"TransferLink\")\n  paymentMethod       PaymentMethod?        @relation(fields: [paymentMethodId], references: [id])\n  recurring           RecurringTransaction? @relation(fields: [recurringId], references: [id])\n  user                User                  @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([userId])\n  @@index([categoryId])\n  @@index([type])\n  @@index([transactionDate])\n  @@index([deletedAt])\n  @@index([recurringId])\n  @@map(\"transactions\")\n  @@schema(\"transaction\")\n}\n\nmodel RecurringTransaction {\n  id              String              @id @default(cuid())\n  userId          String\n  categoryId      String\n  paymentMethodId String?\n  type            TransactionType\n  amount          Decimal             @db.Decimal(15, 2)\n  currency        Currency            @default(IDR)\n  title           String\n  description     String?\n  frequency       RecurrenceFrequency\n  startDate       DateTime\n  endDate         DateTime?\n  nextDate        DateTime\n  isActive        Boolean             @default(true)\n  dayOfMonth      Int?\n  dayOfWeek       Int?\n  lastGeneratedAt DateTime?\n  createdAt       DateTime            @default(now())\n  updatedAt       DateTime            @updatedAt\n  deletedAt       DateTime?\n  category        Category            @relation(fields: [categoryId], references: [id])\n  paymentMethod   PaymentMethod?      @relation(fields: [paymentMethodId], references: [id])\n  user            User                @relation(fields: [userId], references: [id], onDelete: Cascade)\n  transactions    Transaction[]\n\n  @@index([userId])\n  @@index([isActive])\n  @@index([nextDate])\n  @@map(\"recurring_transactions\")\n  @@schema(\"transaction\")\n}\n\nmodel Tag {\n  id           String           @id @default(cuid())\n  name         String           @unique\n  color        String?\n  createdAt    DateTime         @default(now())\n  transactions TransactionTag[]\n\n  @@map(\"tags\")\n  @@schema(\"transaction\")\n}\n\nmodel TransactionTag {\n  transactionId String\n  tagId         String\n  tag           Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)\n  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)\n\n  @@id([transactionId, tagId])\n  @@index([transactionId])\n  @@index([tagId])\n  @@map(\"transaction_tags\")\n  @@schema(\"transaction\")\n}\n\nmodel PaymentMethod {\n  id                    String                 @id @default(cuid())\n  userId                String\n  name                  String\n  type                  String\n  icon                  String?\n  color                 String?\n  accountNumber         String?\n  accountName           String?\n  isDefault             Boolean                @default(false)\n  isActive              Boolean                @default(true)\n  balance               Decimal?               @db.Decimal(15, 2)\n  createdAt             DateTime               @default(now())\n  updatedAt             DateTime               @updatedAt\n  deletedAt             DateTime?\n  user                  User                   @relation(fields: [userId], references: [id], onDelete: Cascade)\n  recurringTransactions RecurringTransaction[]\n  transactions          Transaction[]\n\n  @@index([userId])\n  @@index([isDefault])\n  @@map(\"payment_methods\")\n  @@schema(\"transaction\")\n}\n\nmodel User {\n  id                    String                 @id @default(cuid())\n  email                 String                 @unique\n  password              String?\n  provider              AuthProvider           @default(EMAIL)\n  providerId            String?\n  emailVerified         Boolean                @default(false)\n  status                UserStatus             @default(ACTIVE)\n  lastLoginAt           DateTime?\n  createdAt             DateTime               @default(now())\n  updatedAt             DateTime               @updatedAt\n  deletedAt             DateTime?\n  budgets               Budget[]\n  categories            Category[]\n  goals                 Goal[]\n  notifications         Notification[]\n  paymentMethods        PaymentMethod[]\n  recurringTransactions RecurringTransaction[]\n  transactions          Transaction[]\n  sessions              Session[]\n  profile               UserProfile?\n  settings              UserSettings?\n\n  @@index([email])\n  @@index([provider])\n  @@index([deletedAt])\n  @@map(\"users\")\n  @@schema(\"user\")\n}\n\nmodel UserProfile {\n  id              String    @id @default(cuid())\n  userId          String    @unique\n  firstName       String?\n  lastName        String?\n  fullName        String?\n  avatar          String?\n  phone           String?   @unique\n  dateOfBirth     DateTime?\n  gender          String?\n  defaultCurrency Currency  @default(IDR)\n  language        String    @default(\"id\")\n  timezone        String    @default(\"Asia/Jakarta\")\n  createdAt       DateTime  @default(now())\n  updatedAt       DateTime  @updatedAt\n  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"user_profiles\")\n  @@schema(\"user\")\n}\n\nmodel UserSettings {\n  id                   String   @id @default(cuid())\n  userId               String   @unique\n  emailNotifications   Boolean  @default(true)\n  pushNotifications    Boolean  @default(true)\n  budgetAlerts         Boolean  @default(true)\n  goalReminders        Boolean  @default(true)\n  budgetAlertThreshold Int      @default(80)\n  showDecimal          Boolean  @default(true)\n  darkMode             Boolean  @default(false)\n  shareStatistics      Boolean  @default(false)\n  createdAt            DateTime @default(now())\n  updatedAt            DateTime @updatedAt\n  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"user_settings\")\n  @@schema(\"user\")\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  userId       String\n  token        String   @unique\n  refreshToken String?  @unique\n  deviceInfo   Json?\n  ipAddress    String?\n  expiresAt    DateTime\n  createdAt    DateTime @default(now())\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([userId])\n  @@index([token])\n  @@map(\"sessions\")\n  @@schema(\"user\")\n}\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../generated/prisma\"\n  previewFeatures = [\"prismaSchemaFolder\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n  schemas  = [\"audit\", \"budget\", \"category\", \"goal\", \"notification\", \"transaction\", \"user\"]\n}\n",
+  "inlineSchemaHash": "8d9bea38a5ea0f044a966cf2e813034aaf2deb9ade2065960edd388eff7f4108",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"AuditLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"action\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"entity\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"entityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"oldValues\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"newValues\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"ipAddress\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userAgent\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"audit_logs\"},\"Budget\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"categoryId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"amountLimit\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"currency\",\"kind\":\"enum\",\"type\":\"Currency\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"alertThreshold\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"hasAlerted\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isRolling\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"rollingFrequency\",\"kind\":\"enum\",\"type\":\"RecurrenceFrequency\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"category\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"BudgetToCategory\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"BudgetToUser\"}],\"dbName\":\"budgets\"},\"Category\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"icon\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"color\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"CategoryType\"},{\"name\":\"isSystem\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"parentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"position\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"budgets\",\"kind\":\"object\",\"type\":\"Budget\",\"relationName\":\"BudgetToCategory\"},{\"name\":\"parent\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryHierarchy\"},{\"name\":\"children\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryHierarchy\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"CategoryToUser\"},{\"name\":\"recurringTransactions\",\"kind\":\"object\",\"type\":\"RecurringTransaction\",\"relationName\":\"CategoryToRecurringTransaction\"},{\"name\":\"transactions\",\"kind\":\"object\",\"type\":\"Transaction\",\"relationName\":\"CategoryToTransaction\"}],\"dbName\":\"categories\"},\"Goal\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"icon\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"color\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"targetAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"currentAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"currency\",\"kind\":\"enum\",\"type\":\"Currency\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deadline\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"GoalStatus\"},{\"name\":\"milestones\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"autoSaveEnabled\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"autoSaveAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"autoSaveFrequency\",\"kind\":\"enum\",\"type\":\"RecurrenceFrequency\"},{\"name\":\"completedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"contributions\",\"kind\":\"object\",\"type\":\"GoalContribution\",\"relationName\":\"GoalToGoalContribution\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"GoalToUser\"}],\"dbName\":\"goals\"},\"GoalContribution\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"goalId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contributedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"goal\",\"kind\":\"object\",\"type\":\"Goal\",\"relationName\":\"GoalToGoalContribution\"}],\"dbName\":\"goal_contributions\"},\"Notification\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"NotificationType\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"isRead\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"readAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"NotificationToUser\"}],\"dbName\":\"notifications\"},\"Transaction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"categoryId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paymentMethodId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TransactionType\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"currency\",\"kind\":\"enum\",\"type\":\"Currency\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"transactionDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"latitude\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"longitude\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"attachments\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"toUserId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"linkedTransactionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isRecurring\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"recurringId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"tags\",\"kind\":\"object\",\"type\":\"TransactionTag\",\"relationName\":\"TransactionToTransactionTag\"},{\"name\":\"category\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryToTransaction\"},{\"name\":\"linkedTransaction\",\"kind\":\"object\",\"type\":\"Transaction\",\"relationName\":\"TransferLink\"},{\"name\":\"transferLink\",\"kind\":\"object\",\"type\":\"Transaction\",\"relationName\":\"TransferLink\"},{\"name\":\"paymentMethod\",\"kind\":\"object\",\"type\":\"PaymentMethod\",\"relationName\":\"PaymentMethodToTransaction\"},{\"name\":\"recurring\",\"kind\":\"object\",\"type\":\"RecurringTransaction\",\"relationName\":\"RecurringTransactionToTransaction\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TransactionToUser\"}],\"dbName\":\"transactions\"},\"RecurringTransaction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"categoryId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paymentMethodId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TransactionType\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"currency\",\"kind\":\"enum\",\"type\":\"Currency\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"frequency\",\"kind\":\"enum\",\"type\":\"RecurrenceFrequency\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"nextDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"dayOfMonth\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"dayOfWeek\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lastGeneratedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"category\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryToRecurringTransaction\"},{\"name\":\"paymentMethod\",\"kind\":\"object\",\"type\":\"PaymentMethod\",\"relationName\":\"PaymentMethodToRecurringTransaction\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RecurringTransactionToUser\"},{\"name\":\"transactions\",\"kind\":\"object\",\"type\":\"Transaction\",\"relationName\":\"RecurringTransactionToTransaction\"}],\"dbName\":\"recurring_transactions\"},\"Tag\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"color\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"transactions\",\"kind\":\"object\",\"type\":\"TransactionTag\",\"relationName\":\"TagToTransactionTag\"}],\"dbName\":\"tags\"},\"TransactionTag\":{\"fields\":[{\"name\":\"transactionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tagId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tag\",\"kind\":\"object\",\"type\":\"Tag\",\"relationName\":\"TagToTransactionTag\"},{\"name\":\"transaction\",\"kind\":\"object\",\"type\":\"Transaction\",\"relationName\":\"TransactionToTransactionTag\"}],\"dbName\":\"transaction_tags\"},\"PaymentMethod\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"icon\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"color\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accountNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accountName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isDefault\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"balance\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PaymentMethodToUser\"},{\"name\":\"recurringTransactions\",\"kind\":\"object\",\"type\":\"RecurringTransaction\",\"relationName\":\"PaymentMethodToRecurringTransaction\"},{\"name\":\"transactions\",\"kind\":\"object\",\"type\":\"Transaction\",\"relationName\":\"PaymentMethodToTransaction\"}],\"dbName\":\"payment_methods\"},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"enum\",\"type\":\"AuthProvider\"},{\"name\":\"providerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"UserStatus\"},{\"name\":\"lastLoginAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"budgets\",\"kind\":\"object\",\"type\":\"Budget\",\"relationName\":\"BudgetToUser\"},{\"name\":\"categories\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryToUser\"},{\"name\":\"goals\",\"kind\":\"object\",\"type\":\"Goal\",\"relationName\":\"GoalToUser\"},{\"name\":\"notifications\",\"kind\":\"object\",\"type\":\"Notification\",\"relationName\":\"NotificationToUser\"},{\"name\":\"paymentMethods\",\"kind\":\"object\",\"type\":\"PaymentMethod\",\"relationName\":\"PaymentMethodToUser\"},{\"name\":\"recurringTransactions\",\"kind\":\"object\",\"type\":\"RecurringTransaction\",\"relationName\":\"RecurringTransactionToUser\"},{\"name\":\"transactions\",\"kind\":\"object\",\"type\":\"Transaction\",\"relationName\":\"TransactionToUser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"},{\"name\":\"profile\",\"kind\":\"object\",\"type\":\"UserProfile\",\"relationName\":\"UserToUserProfile\"},{\"name\":\"settings\",\"kind\":\"object\",\"type\":\"UserSettings\",\"relationName\":\"UserToUserSettings\"}],\"dbName\":\"users\"},\"UserProfile\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dateOfBirth\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"defaultCurrency\",\"kind\":\"enum\",\"type\":\"Currency\"},{\"name\":\"language\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timezone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToUserProfile\"}],\"dbName\":\"user_profiles\"},\"UserSettings\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailNotifications\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"pushNotifications\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"budgetAlerts\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"goalReminders\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"budgetAlertThreshold\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"showDecimal\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"darkMode\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"shareStatistics\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToUserSettings\"}],\"dbName\":\"user_settings\"},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refreshToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"deviceInfo\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"ipAddress\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":\"sessions\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
