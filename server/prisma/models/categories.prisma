@@ -33,4 +33,6 @@ model Category {
   @@index([isSystem])
   @@index([parentId])
   @@map("categories")
+        @@schema("category")
+
 }
