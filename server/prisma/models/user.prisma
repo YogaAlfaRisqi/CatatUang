@@ -29,6 +29,7 @@ model User {
   @@index([provider])
   @@index([deletedAt])
   @@map("users")
+  @@schema("user")
 }
 
 
@@ -57,6 +58,7 @@ model UserProfile {
   user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_profiles")
+  @@schema("user")
 }
 
 model UserSettings {
@@ -86,6 +88,7 @@ model UserSettings {
   user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_settings")
+  @@schema("user")
 }
 
 model Session {
@@ -104,4 +107,5 @@ model Session {
   @@index([userId])
   @@index([token])
   @@map("sessions")
+  @@schema("user")
 }

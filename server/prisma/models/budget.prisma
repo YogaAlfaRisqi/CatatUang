@@ -34,4 +34,6 @@ model Budget {
   @@index([startDate, endDate])
   @@index([isActive])
   @@map("budgets")
+        @@schema("budget")
+
 }

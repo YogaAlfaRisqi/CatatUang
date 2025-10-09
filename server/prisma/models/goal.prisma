@@ -38,6 +38,8 @@ model Goal {
   @@index([status])
   @@index([deadline])
   @@map("goals")
+        @@schema("goal")
+
 }
 
 model GoalContribution {
@@ -55,4 +57,5 @@ model GoalContribution {
   @@index([goalId])
   @@index([contributedAt])
   @@map("goal_contributions")
+      @@schema("goal")
 }

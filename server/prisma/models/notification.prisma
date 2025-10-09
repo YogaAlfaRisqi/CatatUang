@@ -19,4 +19,5 @@ model Notification {
   @@index([isRead])
   @@index([createdAt])
   @@map("notifications")
+    @@schema("notification")
 }
