@@ -1,7 +1,6 @@
 const userRoutes = require('express').Router();
 const UserController = require("../controllers/UserController");
 
-
 userRoutes.get("/", UserController.getAllUsers);
 userRoutes.get("/:id", UserController.getUserById);
 userRoutes.get("/", UserController.createUser);

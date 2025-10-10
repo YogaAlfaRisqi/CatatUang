@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const userRoutes = require('./user.routes');
+const authRoutes = require('./auth.routes');
 
 router.get('/', (req, res)=>{
     res.json({
@@ -17,5 +18,6 @@ router.get('/', (req, res)=>{
 })
 
 router.use('/users', userRoutes);
+router.use('/auth', authRoutes);
 
 module.exports = router;
