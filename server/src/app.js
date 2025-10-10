@@ -4,8 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config();
-// const errorHandler = require('./api/v1/middlewares/errorHandler');
-// const errorConverter = require('./api/v1/middlewares/errorConverter');
+const {errorConverter,errorHandler } = require('./api/v1/middlewares/errorHandler');
 const api = require("./api/v1/routes/index.routes");
 const app = express();
 
@@ -28,7 +27,7 @@ app.get('/', (req, res) => {
 });
 
 // Error handling
-// app.use(errorHandler)
-// app.use(errorConverter);
+app.use(errorConverter);
+app.use(errorHandler)
 
 module.exports = app;

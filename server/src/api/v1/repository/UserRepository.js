@@ -19,10 +19,10 @@ class UserRepository {
     }
   }
 
-  static async findByUsername(username) {
+  static async findById(id){
     try {
       return await prisma.user.findUnique({
-        where: { username },
+        where: { id },
       });
     } catch (error) {
       throw new Error(`Database error: ${error.message}`);
