@@ -8,4 +8,8 @@ class UserService {
         return UserRepository.findAll({page, limit});
     }
 
+    async register(){
+        
+    }
+
 }
