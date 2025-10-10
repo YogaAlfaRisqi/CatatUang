@@ -33,5 +33,3 @@ const authorize = (...roles) => {
 };
 
 module.exports = { protect, authorize };
-
-module.exports = logger;

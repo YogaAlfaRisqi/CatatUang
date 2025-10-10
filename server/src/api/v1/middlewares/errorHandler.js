@@ -1,4 +1,4 @@
-const ApiError = require('../../../utils/ApiError');
+const ApiError = require('../../shared/utils/ApiError');
 const logger = require('./logger');
 const config = require('../config/env');
 

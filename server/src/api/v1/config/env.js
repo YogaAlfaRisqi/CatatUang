@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 const path = require('path');
-const Joi = require('joi');
+const Joi = require(`joi`);
 
 dotenv.config({path: path.join(__dirname, '../../.env')});
 
@@ -14,10 +14,10 @@ const envSchema = Joi.object({
     REDIS_PORT:Joi.number().default(6379),
     RATE_LIMIT_WINDOW_MS: Joi.number().default(15 * 60 * 1000),
     RATE_LIMIT_MAX_REQUEST: Joi.number().default(100),
-    CORS_ORIGIN: joi.string().required(),
+    // CORS_ORIGIN: Joi.string().required(),
 }).unknown();
 
-const { error, value: envVars } = envSchema.validate(process.env);
+const { error, value: env } = envSchema.validate(process.env);
 if (error) {
     throw new Error(`Config validation error: ${error.message}`);
 }
@@ -39,7 +39,7 @@ module.exports = {
     windowMs: env.RATE_LIMIT_WINDOW_MS,
     max: env.RATE_LIMIT_MAX_REQUESTS
   },
-  cors: {
-    origin: env.CORS_ORIGIN.split(',')
-  }
+  // cors: {
+  //   origin: env.CORS_ORIGIN.split(',')
+  // }
 };
