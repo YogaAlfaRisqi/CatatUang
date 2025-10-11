@@ -42,7 +42,7 @@ class AuthService {
       );
     }
 
-    const isPasswordValid = bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       throw new AppError(401, 'Invalid credentials', 'Email or password is incorrect');
     }
@@ -71,8 +71,10 @@ class AuthService {
     });
   }
 
-
-  static async logout(userId){}
+  static async logout(userId){
+    await UserRepository.clearRefreshToken(userId);
+    return true;
+  }
 };
 
 

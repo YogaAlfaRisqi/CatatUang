@@ -48,6 +48,14 @@ class UserRepository {
     }
     throw new Error(`Database error: ${error.message}`);
   }
+
+
+  static async clearRefreshToken(userId) {
+    return await prisma.user.update({
+      where: { id: userId },
+      data: { refreshToken: null }
+    });
+  }
 }
 
 module.exports = UserRepository;
