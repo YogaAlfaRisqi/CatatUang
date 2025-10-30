@@ -56,14 +56,13 @@ class TransactionRepository {
     };
   }
 
-  static async create(transactionData) {
-    try {
-      return await prisma.create({
-        data: transactionData,
-      });
-    } catch (err) {
-      throw new Error(`Database error: ${error.message}`);
-    }
+  static async create(data) {
+    return await prisma.transaction.create({
+      data: {
+        ...data,
+        date: new Date(data.date)
+      }
+    });
   }
 }
 
