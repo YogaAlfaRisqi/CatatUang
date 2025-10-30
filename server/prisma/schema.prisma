@@ -1,11 +1,443 @@
 generator client {
   provider        = "prisma-client-js"
-  output          = "../generated/prisma"
-  previewFeatures = ["prismaSchemaFolder"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schemas  = ["audit", "budget", "category", "goal", "notification", "transaction", "user"]
+}
+
+
+model User {
+  id                    String                 @id @default(cuid())
+  email                 String                 @unique
+  password              String?
+  provider              AuthProvider           @default(EMAIL)
+  providerId            String?
+  emailVerified         Boolean                @default(false)
+  status                UserStatus             @default(ACTIVE)
+  lastLoginAt           DateTime?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  deletedAt             DateTime?
+  budgets               Budget[]
+  categories            Category[]
+  goals                 Goal[]
+  notifications         Notification[]
+  paymentMethods        PaymentMethod[]
+  recurringTransactions RecurringTransaction[]
+  transactions          Transaction[]
+  sessions              Session[]
+  profile               UserProfile?
+  settings              UserSettings?
+
+  @@index([email])
+  @@index([provider])
+  @@index([deletedAt])
+  @@map("users")
+
+}
+
+model UserProfile {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  firstName       String?
+  lastName        String?
+  fullName        String?
+  avatar          String?
+  phone           String?   @unique
+  dateOfBirth     DateTime?
+  gender          String?
+  defaultCurrency Currency  @default(IDR)
+  language        String    @default("id")
+  timezone        String    @default("Asia/Jakarta")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_profiles")
+
+}
+
+model UserSettings {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  emailNotifications   Boolean  @default(true)
+  pushNotifications    Boolean  @default(true)
+  budgetAlerts         Boolean  @default(true)
+  goalReminders        Boolean  @default(true)
+  budgetAlertThreshold Int      @default(80)
+  showDecimal          Boolean  @default(true)
+  darkMode             Boolean  @default(false)
+  shareStatistics      Boolean  @default(false)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  token        String   @unique
+  refreshToken String?  @unique
+  deviceInfo   Json?
+  ipAddress    String?
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@map("sessions")
+
+}
+
+
+model Transaction {
+  id                  String                @id @default(cuid())
+  userId              String
+  categoryId          String
+  paymentMethodId     String?
+  type                TransactionType
+  amount              Decimal               @db.Decimal(15, 2)
+  currency            Currency              @default(IDR)
+  title               String?
+  description         String?
+  notes               String?
+  transactionDate     DateTime              @default(now())
+  location            String?
+  latitude            Float?
+  longitude           Float?
+  attachments         Json?
+  toUserId            String?
+  linkedTransactionId String?               @unique
+  isRecurring         Boolean               @default(false)
+  recurringId         String?
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  deletedAt           DateTime?
+  tags                TransactionTag[]
+  category            Category              @relation(fields: [categoryId], references: [id])
+  linkedTransaction   Transaction?          @relation("TransferLink", fields: [linkedTransactionId], references: [id])
+  transferLink        Transaction?          @relation("TransferLink")
+  paymentMethod       PaymentMethod?        @relation(fields: [paymentMethodId], references: [id])
+  recurring           RecurringTransaction? @relation(fields: [recurringId], references: [id])
+  user                User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([categoryId])
+  @@index([type])
+  @@index([transactionDate])
+  @@index([deletedAt])
+  @@index([recurringId])
+  @@map("transactions")
+
+}
+
+model RecurringTransaction {
+  id              String              @id @default(cuid())
+  userId          String
+  categoryId      String
+  paymentMethodId String?
+  type            TransactionType
+  amount          Decimal             @db.Decimal(15, 2)
+  currency        Currency            @default(IDR)
+  title           String
+  description     String?
+  frequency       RecurrenceFrequency
+  startDate       DateTime
+  endDate         DateTime?
+  nextDate        DateTime
+  isActive        Boolean             @default(true)
+  dayOfMonth      Int?
+  dayOfWeek       Int?
+  lastGeneratedAt DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  deletedAt       DateTime?
+  category        Category            @relation(fields: [categoryId], references: [id])
+  paymentMethod   PaymentMethod?      @relation(fields: [paymentMethodId], references: [id])
+  user            User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions    Transaction[]
+
+  @@index([userId])
+  @@index([isActive])
+  @@index([nextDate])
+  @@map("recurring_transactions")
+
+}
+
+model Tag {
+  id           String           @id @default(cuid())
+  name         String           @unique
+  color        String?
+  createdAt    DateTime         @default(now())
+  transactions TransactionTag[]
+
+  @@map("tags")
+
+}
+
+model TransactionTag {
+  transactionId String
+  tagId         String
+  tag           Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  @@id([transactionId, tagId])
+  @@index([transactionId])
+  @@index([tagId])
+  @@map("transaction_tags")
+
+}
+
+model PaymentMethod {
+  id                    String                 @id @default(cuid())
+  userId                String
+  name                  String
+  type                  String
+  icon                  String?
+  color                 String?
+  accountNumber         String?
+  accountName           String?
+  isDefault             Boolean                @default(false)
+  isActive              Boolean                @default(true)
+  balance               Decimal?               @db.Decimal(15, 2)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  deletedAt             DateTime?
+  user                  User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recurringTransactions RecurringTransaction[]
+  transactions          Transaction[]
+
+  @@index([userId])
+  @@index([isDefault])
+  @@map("payment_methods")
+
+}
+
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  data      Json?
+  isRead    Boolean          @default(false)
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+  @@map("notifications")
+
+}
+
+
+model Goal {
+  id                String               @id @default(cuid())
+  userId            String
+  title             String
+  description       String?
+  icon              String?
+  color             String?
+  targetAmount      Decimal              @db.Decimal(15, 2)
+  currentAmount     Decimal              @default(0) @db.Decimal(15, 2)
+  currency          Currency             @default(IDR)
+  startDate         DateTime             @default(now())
+  deadline          DateTime?
+  status            GoalStatus           @default(ACTIVE)
+  milestones        Json?
+  autoSaveEnabled   Boolean              @default(false)
+  autoSaveAmount    Decimal?             @db.Decimal(15, 2)
+  autoSaveFrequency RecurrenceFrequency?
+  completedAt       DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  deletedAt         DateTime?
+  contributions     GoalContribution[]
+  user              User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([deadline])
+  @@map("goals")
+
+}
+
+model GoalContribution {
+  id            String   @id @default(cuid())
+  goalId        String
+  amount        Decimal  @db.Decimal(15, 2)
+  notes         String?
+  contributedAt DateTime @default(now())
+  goal          Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+
+  @@index([goalId])
+  @@index([contributedAt])
+  @@map("goal_contributions")
+
+}
+
+
+model Category {
+  id                    String                 @id @default(cuid())
+  userId                String?
+  name                  String
+  slug                  String
+  icon                  String?
+  color                 String?
+  type                  CategoryType
+  isSystem              Boolean                @default(false)
+  isActive              Boolean                @default(true)
+  parentId              String?
+  position              Int                    @default(0)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  deletedAt             DateTime?
+  budgets               Budget[]
+  parent                Category?              @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children              Category[]             @relation("CategoryHierarchy")
+  user                  User?                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recurringTransactions RecurringTransaction[]
+  transactions          Transaction[]
+
+  @@unique([userId, slug])
+  @@index([userId])
+  @@index([type])
+  @@index([isSystem])
+  @@index([parentId])
+  @@map("categories")
+
+}
+
+model Budget {
+  id               String               @id @default(cuid())
+  userId           String
+  categoryId       String?
+  name             String?
+  amountLimit      Decimal              @db.Decimal(15, 2)
+  currency         Currency             @default(IDR)
+  startDate        DateTime
+  endDate          DateTime
+  alertThreshold   Int                  @default(80)
+  hasAlerted       Boolean              @default(false)
+  isRolling        Boolean              @default(false)
+  rollingFrequency RecurrenceFrequency?
+  isActive         Boolean              @default(true)
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  deletedAt        DateTime?
+  category         Category?            @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  user             User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([categoryId])
+  @@index([startDate, endDate])
+  @@index([isActive])
+  @@map("budgets")
+
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String
+  oldValues Json?
+  newValues Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([entity, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+
+}
+
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+
+
+}
+
+enum AuthProvider {
+  EMAIL
+  GOOGLE
+  FACEBOOK
+  APPLE
+
+
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENED
+  DELETED
+
+
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+
+
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+  BOTH
+
+
+}
+
+enum RecurrenceFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  PAUSED
+
+
+}
+
+enum NotificationType {
+  BUDGET_WARNING
+  BUDGET_EXCEEDED
+  GOAL_MILESTONE
+  RECURRING_REMINDER
+  REPORT_READY
+
+}
+
+enum Currency {
+  IDR
+  USD
+  EUR
+  SGD
+  MYR
+
 }

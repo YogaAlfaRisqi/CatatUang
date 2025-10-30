@@ -1,58 +1,57 @@
-const UserService = require("../../../../../../point-of-sale/apps/api/src/services/UserService");
+// src/controllers/UserController.js
+const UserService = require('../services/user.service');
 
 class UserController {
-  // methods here
-  static async getAllUsers(req, res, next) {
-
-    try{
-      const result = await UserService.getAllUsers();
-      res.json({
-        success: true,
-        message: "List of users",
-        data: result
+  static async getAll(req, res) {
+    try {
+      const { page = 1, limit = 10, search } = req.query;
+      const result = await UserService.getAllUsers({
+        page: Number(page),
+        limit: Number(limit),
+        search,
       });
 
-    }catch(err){next(err)}
+      res.json({ success: true, ...result });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
   }
 
-  static async getUserById(req, res) {
-
-    res.json({
-      success: true,
-      message: `User with ID`,
-    });
+  static async getById(req, res) {
+    try {
+      const user = await UserService.getUserById(req.params.id);
+      res.json({ success: true, data: user });
+    } catch (error) {
+      res.status(404).json({ success: false, message: error.message });
+    }
   }
 
-  static async createUser(req, res) {
-    res.json({
-      success: true,
-      message: "User created",
-    });
+  static async create(req, res) {
+    try {
+      const user = await UserService.createUser(req.body);
+      res.status(201).json({ success: true, data: user });
+    } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
+    }
   }
 
-  static async updateUser(req, res) {
-    res.json({
-      success: true,
-      message: `User with ID updated`,
-    });
+  static async update(req, res) {
+    try {
+      const user = await UserService.updateUser(req.params.id, req.body);
+      res.json({ success: true, data: user });
+    } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
+    }
   }
 
-  static async deleteUser(req, res) {
-    res.json({
-      success: true,
-      message: `User with ID deleted`,
-    });
+  static async delete(req, res) {
+    try {
+      await UserService.deleteUser(req.params.id);
+      res.json({ success: true, message: 'User deleted successfully' });
+    } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
+    }
   }
-
-  static async profile(req, res) {
-    res.json({
-      success: true,
-      message: "User profile",
-    });
-  }
-
-
-
 }
 
 module.exports = UserController;

@@ -44,7 +44,48 @@ class TransactionService {
     }
   }
 
-  async create() {}
+  async createTransaction(data) {
+    try {
+      // Validate required fields
+      this.validateTransactionData(data);
+      
+      // Validate amount
+      if (typeof data.amount !== 'number' || data.amount <= 0) {
+        const error = new Error('Amount must be a positive number');
+        error.statusCode = 400;
+        throw error;
+      }
+      
+      // Validate type
+      const validTypes = ['INCOME', 'EXPENSE'];
+      if (!validTypes.includes(data.type.toUpperCase())) {
+        const error = new Error('Type must be either INCOME or EXPENSE');
+        error.statusCode = 400;
+        throw error;
+      }
+      
+      // Validate date
+      const transactionDate = new Date(data.date);
+      if (isNaN(transactionDate.getTime())) {
+        const error = new Error('Invalid date format');
+        error.statusCode = 400;
+        throw error;
+      }
+      
+      const transactionData = {
+        amount: parseFloat(data.amount),
+        type: data.type.toUpperCase(),
+        category: data.category.trim(),
+        description: data.description.trim(),
+        date: data.date
+      };
+      
+      const transaction = await TransactionRepository.create(transactionData);
+      return transaction;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = TransactionService;
